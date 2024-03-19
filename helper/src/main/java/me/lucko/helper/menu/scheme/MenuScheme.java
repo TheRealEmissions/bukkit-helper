@@ -29,10 +29,7 @@ import com.google.common.collect.ImmutableList;
 import me.lucko.helper.menu.Gui;
 import me.lucko.helper.utils.annotation.NonnullByDefault;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Nullable;
 
@@ -93,6 +90,65 @@ public class MenuScheme {
     public MenuScheme masks(String... strings) {
         for (String s : strings) {
             mask(s);
+        }
+        return this;
+    }
+
+    public MenuScheme masks(boolean slot0) {
+        return masks(slot0, false);
+    }
+
+    public MenuScheme masks(boolean slot0, boolean slot1) {
+        return masks(slot0, slot1, false);
+    }
+
+    public MenuScheme masks(boolean slot0, boolean slot1, boolean slot2) {
+        return masks(slot0, slot1, slot2, false);
+    }
+
+    public MenuScheme masks(boolean slot0, boolean slot1, boolean slot2, boolean slot3) {
+        return masks(slot0, slot1, slot2, slot3, false);
+    }
+
+    public MenuScheme masks(boolean slot0, boolean slot1, boolean slot2, boolean slot3, boolean slot4) {
+        return masks(slot0, slot1, slot2, slot3, slot4, false);
+    }
+
+    public MenuScheme masks(boolean slot0, boolean slot1, boolean slot2, boolean slot3, boolean slot4, boolean slot5) {
+        return masks(slot0, slot1, slot2, slot3, slot4, slot5, false);
+    }
+
+    public MenuScheme masks(boolean slot0, boolean slot1, boolean slot2, boolean slot3, boolean slot4, boolean slot5, boolean slot6) {
+        return masks(slot0, slot1, slot2, slot3, slot4, slot5, slot6, false);
+    }
+
+    public MenuScheme masks(boolean slot0, boolean slot1, boolean slot2, boolean slot3, boolean slot4, boolean slot5, boolean slot6, boolean slot7) {
+        return masks(slot0, slot1, slot2, slot3, slot4, slot5, slot6, slot7, false);
+    }
+
+    public MenuScheme masks(boolean slot0, boolean slot1, boolean slot2, boolean slot3, boolean slot4, boolean slot5, boolean slot6, boolean slot7, boolean slot8) {
+        boolean[] ret = new boolean[9];
+        ret[0] = slot0;
+        ret[1] = slot1;
+        ret[2] = slot2;
+        ret[3] = slot3;
+        ret[4] = slot4;
+        ret[5] = slot5;
+        ret[6] = slot6;
+        ret[7] = slot7;
+        ret[8] = slot8;
+        this.maskRows.add(ret);
+        return this;
+    }
+
+    public MenuScheme masks(boolean ... slots) {
+        // split into groups of 9
+        if (slots.length <= 9) {
+            this.maskRows.add(Arrays.copyOf(slots, 9));
+        } else {
+            for (int i = 0; i < slots.length; i += 9) {
+                this.maskRows.add(Arrays.copyOfRange(slots, i, Math.min(i + 9, slots.length)));
+            }
         }
         return this;
     }
